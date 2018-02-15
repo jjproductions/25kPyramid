@@ -183,14 +183,25 @@ var tName2 = "Team 2";
         }
     });
 
-    function ShowPyramidView() {
+    function ShowPyramidView(isRound) {
+        if (isRound == undefined || isRound) {
+            $("#btnNewGame").show();
+            $("#scoreboard").show();
+            $("#btnCircleGame").show();
+            $("#btnStartCircle").hide();
+        }
+        else {
+            $("#btnNewGame").hide();
+            $("#scoreboard").hide();
+            $("#btnCircleGame").hide();
+            $("#btnStartCircle").show();
+        }
         $("#finalhtml").show();
         $("#wordsview").hide();
-        $("#btnNewGame").show();
         $("#btnStartGame").hide();
         $("#divDescription").hide();
         $("#divCountDown").hide();
-        $("#scoreboard").show();
+        
         //isRoundComplete();
     }
 
@@ -252,7 +263,6 @@ var tName2 = "Team 2";
     }
 
     function NextRound() {
-
         $("#RoundSummary").hide();
         getNextRoundData();
         TeamSetup();
@@ -260,8 +270,15 @@ var tName2 = "Team 2";
         ShowPyramidView();
     }
 
-    function NextWord(success) {
+    function CircleRound() {
+        $("#RoundSummary").hide();
+        getNextRoundData(false);
+        $("#scoreboard").hide();
+        CreatePyramidView();
+        ShowPyramidView(false);
+    }
 
+    function NextWord(success) {
         var i = currentWords.indexOf(currentWord);
         if (i < 0)
             return;
