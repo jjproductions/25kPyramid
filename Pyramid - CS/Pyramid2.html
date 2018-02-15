@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../bootstrap/3.3.7/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bootstrap/3.3.7/bootstrap-theme.min.css" />
+    <link rel="Stylesheet" type="text/css" href="./Styles/myStyle.css" />
+    <script type="text/javascript" src="../jquery/1.11.1/jquery.min.js"></script>
+    <script src="../handlebars/2.0.0/handlebars.js"></script>
+    <script type="text/javascript" src="./Scripts/Pyramid.js"></script>
+    <script type="text/javascript" src="./data/GameData.js"></script>
+    <script type="text/javascript" src="./Scripts/hb-Pyramid.js"></script>
+    
+</head>
+<body>
+
+    <script id="round-template" type="text/x-handlebars-template">
+        <div class="pyramid">
+            {{#each this.Round.Categories.Category}}
+            <div id="divCat{{@index}}" class="background-gradient" onclick="javascript:showCatDescription('divCat{{@index}}','{{_description}}')" done="false">{{_name}}</div>
+            {{#ifCond @index '==' '0'}}
+        </div>
+        <div class="pyramid">
+            {{/ifCond}}
+            {{#ifCond @index '==' '2'}}
+        </div>
+        <div class="pyramid">
+            {{/ifCond}}
+            {{/each}}
+        </div>
+        <div id="divDescription" class="description"></div>
+            </script>
+
+    <script id="words-template" type="text/x-handlebars-template">
+        <div id="divCountDown" class="CountDown"></div>
+        <div class="words">
+            <!--{{#each wordList}}
+            <div>{{__text}}</div>
+            {{/each}}-->
+            <div></div>            
+        </div>
+        <div class="words-template-btn float-left" style="margin-left:45px;">Pass</div>
+        <div class="words-template-btn float-right" style="margin-right:45px;">Next</div>
+        </script>
+
+        <span><button id="btnNewGame" class="btn btn-default" onclick="javascript:NextRound(); return false;">New Game</button></span>
+        <span><button id="btnStartGame" class="btn btn-default" onclick="javascript:StartGame(0); return false;">Start</button></span>
+    <div id="scoreboard" class="scoreboard">
+        <div id="divTeam1" class="float-left">Team #1:<div></div></div>
+        <div id="divTeam2" class="float-right">Team #2:<div></div></div>
+    </div>
+        <div id="finalhtml"></div>
+        
+        <div id="wordsview">
+            <div id="divCountDown" class="CountDown"></div>
+            <div id="divWord" class="words"></div>
+            <div id="divPass" class="btn btn-default float-left hide" style="margin-left:45px;width:250px" onclick="javascript: NextWord(false);">Pass</div>
+            <div id="divNext" class="btn btn-default float-right hide" style="margin-right:45px;width:250px" onclick="javascript:NextWord(true);">Next</div>
+        </div>
+        <div id="RoundSummary" class="roundSummary"></div>
+</body>
+</html>
