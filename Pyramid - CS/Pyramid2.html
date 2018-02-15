@@ -31,6 +31,23 @@
         <div id="divDescription" class="description"></div>
             </script>
 
+    <script id="circle-template" type="text/x-handlebars-template">
+        <div class="pyramid">
+            {{#each this.Round.Circle}}
+            <div id="divCat{{@index}}" class="background-gradient" onclick="javascript:showCatDescription('divCat{{@index}}','divCat{{@index}}.innerText')" done="false">{{_name}}</div>
+            {{#ifCond @index '==' '0'}}
+        </div>
+        <div class="pyramid">
+            {{/ifCond}}
+            {{#ifCond @index '==' '2'}}
+        </div>
+        <div class="pyramid">
+            {{/ifCond}}
+            {{/each}}
+        </div>
+        <div id="divDescription" class="description"></div>
+    </script>
+
     <script id="words-template" type="text/x-handlebars-template">
         <div id="divCountDown" class="CountDown"></div>
         <div class="words">
