@@ -189,12 +189,14 @@ var tName2 = "Team 2";
             $("#scoreboard").show();
             $("#btnCircleGame").show();
             $("#btnStartCircle").hide();
+            $("#btnBack").hide();
         }
         else {
             $("#btnNewGame").hide();
             $("#scoreboard").hide();
             $("#btnCircleGame").hide();
             $("#btnStartCircle").show();
+            $("#btnBack").show();
         }
         $("#finalhtml").show();
         $("#wordsview").hide();
@@ -215,11 +217,16 @@ var tName2 = "Team 2";
         $("#scoreboard").hide();
         $("#divPass").hide();
         $("#divNext").hide();
+        $("#btnCircleGame").hide();
     }
 
-    function showCatDescription(id, description) {
-        if ($('#'+id).attr("class") != 'background-gradient categoryBoxDisabled') {
-            $("#btnStartGame").show();
+    function Return() {
+        NextRound();
+    }
+    function showCatDescription(id, description, isRound) {
+        if ($('#' + id).attr("class") != 'background-gradient categoryBoxDisabled') {
+            if (isRound == null || isRound)
+                $("#btnStartGame").show();
             $('#' + id).prop("click", null)
                 .addClass('categoryBoxDisabled')
                 .html(description);
@@ -262,6 +269,14 @@ var tName2 = "Team 2";
         startTimer();
     }
 
+    function CirclePhraseDisplay(index) {
+        $("phr" + index).removeClass("phraseHidden");
+        $("#divCat" + index).attr("done", "true");
+        if ($("#divCountDown").is(":hidden")){
+            $("#divCountDown").show();
+            startTimer();
+        }
+    }
     function NextRound() {
         $("#RoundSummary").hide();
         getNextRoundData();
@@ -274,7 +289,7 @@ var tName2 = "Team 2";
         $("#RoundSummary").hide();
         getNextRoundData(false);
         $("#scoreboard").hide();
-        CreatePyramidView();
+        CreatePyramidView(false);
         ShowPyramidView(false);
     }
 

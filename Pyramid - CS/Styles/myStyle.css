@@ -210,3 +210,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efc5ca', end
     display:block;
 }
 
+.phraseHidden
+{
+    opacity:0;
+}
