@@ -1,7 +1,16 @@
 
-function CreatePyramidView() {
+function CreatePyramidView(isRound) {
+
+    var isCircleRound = true;
+    if (isRound == null || isRound)
+        isCircleRound = false;
+
     // Grab the template script
-    var theTemplateScript = $("#round-template").html();
+    var theTemplateScript;
+    if (isCircleRound)
+        theTemplateScript = $("#circle-template").html();
+    else
+        theTemplateScript = $("#round-template").html();
 
     // Compile the template
     var theTemplate = Handlebars.compile(theTemplateScript);
@@ -34,13 +43,23 @@ function CreatePyramidView() {
     // Add the compiled html to the page
     document.getElementById('finalhtml').innerHTML = theCompiledHtml;
 
-    $.each($("#finalhtml div div"), function (index, tObj) {
-        $(tObj).data("words", RoundData.Round.Categories.Category[index].Word);
-        $(tObj).one("click", function (event) {
-            wordList = $(event.target).data("words");
-            $("#divCat" + index).attr("done","true");
+    if (!isCircleRound) {
+        $.each($("#finalhtml div div"), function (index, tObj) {
+            $(tObj).data("words", RoundData.Round.Categories.Category[index].Word);
+            $(tObj).one("click", function (event) {
+                wordList = $(event.target).data("words");
+                $("#divCat" + index).attr("done", "true");
+            });
         });
-    });
+    }
+    else {
+        $.each($("#finalhtml div div"), function (index, tObj) {
+            $(tObj).data("words", RoundData.Round.Circle.Phrase);
+            $(tObj).one("click", function (event) {
+                CirclePhraseDisplay(index);
+            });
+        });
+    }
     //ShowPyramidView();
 };
 
